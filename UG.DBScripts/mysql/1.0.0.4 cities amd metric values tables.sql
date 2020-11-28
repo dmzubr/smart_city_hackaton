@@ -97,8 +97,33 @@ CREATE TABLE `IndicatorCityValue` (
   UNIQUE INDEX `IndicatorCityValueId` (`IndicatorCityValueId` ASC),
   KEY `Indicator_Values` (`IndicatorId`),
  	CONSTRAINT `Indicator_Values` FOREIGN KEY (`IndicatorId`)  REFERENCES `Indicator` (`IndicatorId`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  KEY `City_IndicatorValues` (`IndicatorId`),
- 	CONSTRAINT `City_IndicatorValues` FOREIGN KEY (`IndicatorId`)  REFERENCES `Indicator` (`IndicatorId`) ON DELETE CASCADE ON UPDATE NO ACTION
+  KEY `City_IndicatorValues` (`CityId`),
+ 	CONSTRAINT `City_IndicatorValues` FOREIGN KEY (`CityId`)  REFERENCES `City` (`CityId`) ON DELETE CASCADE ON UPDATE NO ACTION
+)ENGINE = InnoDB;
+
+ALTER TABLE `Category` 
+ADD COLUMN `IndicatorId` BIGINT NOT NULL AFTER `Name`;
+ALTER TABLE `Category` 
+ADD INDEX `Indicator_Categories_idx` (`IndicatorId` ASC);
+ALTER TABLE `Category` 
+ADD CONSTRAINT `Indicator_Categories`  FOREIGN KEY (`IndicatorId`)  REFERENCES `Indicator` (`IndicatorId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+USE `smartcity`;
+DROP TABLE IF EXISTS `IndicatorSocialVerification`;
+CREATE TABLE `IndicatorSocialVerification` (
+  `IndicatorSocialVerificationId` bigint NOT NULL AUTO_INCREMENT,
+  `IndicatorId` bigint NOT NULL,
+  `CityId` bigint NOT NULL,
+  `Value` decimal NOT NULL,
+  `CalcDate` datetime NULL DEFAULT NULL,
+  `PeriodStart` datetime NOT NULL,
+  `PeriodEnd` datetime NOT NULL,
+  PRIMARY KEY (`IndicatorSocialVerificationId`),
+  UNIQUE INDEX `IndicatorSocialVerificationId` (`IndicatorSocialVerificationId` ASC),
+  KEY `Indicator_SocialVerificationValues` (`IndicatorId`),
+ 	CONSTRAINT `Indicator_SocialVerificationValues` FOREIGN KEY (`IndicatorId`)  REFERENCES `Indicator` (`IndicatorId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  KEY `City_SocialVerificationValues` (`CityId`),
+ 	CONSTRAINT `City_SocialVerificationValues` FOREIGN KEY (`CityId`)  REFERENCES `City` (`CityId`) ON DELETE CASCADE ON UPDATE NO ACTION
 )ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;

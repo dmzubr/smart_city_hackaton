@@ -93,6 +93,7 @@ DROP TABLE IF EXISTS `Category`;
 CREATE TABLE `Category` (
   `CategoryId` bigint NOT NULL AUTO_INCREMENT,
   `Name` varchar(256) NOT NULL,
+  `Name` varchar(256) NOT NULL,
   PRIMARY KEY (`CategoryId`),
   UNIQUE INDEX `CategoryId_UNIQUE` (`CategoryId` ASC)
 );

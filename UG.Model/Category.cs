@@ -15,5 +15,7 @@ namespace UG.Model
         public int CategoryId { get; set; }
         
         public int Name { get; set; }
+
+        public long IndicatorId { get; set; }
     }
 }
