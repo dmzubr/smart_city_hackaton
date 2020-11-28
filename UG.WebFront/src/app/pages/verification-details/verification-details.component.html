@@ -55,7 +55,9 @@
             <td>{{record.likesQuantity}}</td>
             <td>{{record.commentQuantity}}</td>
             <td>
-
+              <span>
+                <nb-icon icon="trash-2-outline" (click)="markRecordAsNotAggressive(record)"></nb-icon>
+              </span>
             </td>
           </tr>
           </tbody>

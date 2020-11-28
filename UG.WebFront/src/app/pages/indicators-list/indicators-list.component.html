@@ -115,6 +115,10 @@
                         && getIndicatorIndexValue(indicatorIndex.indicatorIndexId, selectedYear).length == 0">
                         <nb-icon icon="plus-circle-outline" (click)="setEditedIndicatorIndex(indicatorIndex)"></nb-icon>
                       </span>
+                      <span *ngIf="editedIndicatorIndexId !== indicatorIndex.indicatorIndexId"
+                        (click)="openAttachmentsWindow(indicatorIndex)">
+                        <nb-icon icon="attach-2-outline"></nb-icon>
+                      </span>
                       <input nbInput fullWidth placeholder="Введите значение"
                              *ngIf="editedIndicatorIndexId == indicatorIndex.indicatorIndexId"
                              type="number"
@@ -133,3 +137,15 @@
     </nb-card>
   </div>
 </div>
+
+<ng-template #attachmentsWindow let-data>
+  <div>
+    {{attachmentsIndicatorIndex.name}}
+  </div>
+
+  <button nbButton status="success"
+          class="mat-ripple appearance-hero size-medium status-success shape-rectangle ng-star-inserted nb-transition"
+          style="margin-top: 10px;"
+          (click)="applyAttachmentsIndicatorIndex()">
+    Применить</button>
+</ng-template>

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SubindexService, IndicatorValueService, CityService } from '../../@core/services'
 import {
   SubindexViewModel, ValuesContainerModel, CityModel,
-  IndicatorIndexValueModel, IndicatorSocialVerificationModel, IndicatorViewModel
+  IndicatorIndexValueModel, IndicatorSocialVerificationModel, IndicatorViewModel, IndicatorIndexModel
 } from "../../@core/model";
-import { NbGlobalPhysicalPosition, NbToastrService } from "@nebular/theme";
+import {NbGlobalPhysicalPosition, NbToastrService, NbWindowRef, NbWindowService} from "@nebular/theme";
 import {UserContextHelper} from "../../@core/utils";
 import {IndicatorIndexValueService} from "../../@core/services/indicator-index-value.service";
 import {IndicatorSocialVerificationService} from "../../@core/services/indicator-social-verification.service";
@@ -46,6 +46,7 @@ export class IndicatorsListComponent implements OnInit {
     private indicatorIndexValueService: IndicatorIndexValueService,
     private cityService: CityService,
     private socialVerificationService: IndicatorSocialVerificationService,
+    private windowService: NbWindowService,
     private toastrService: NbToastrService,
     private router: Router){ }
 
@@ -177,5 +178,20 @@ export class IndicatorsListComponent implements OnInit {
 
   public goToIndicatorVerification(indicator: IndicatorViewModel) {
     this.router.navigate([`pages/verify-indicator/${indicator.indicatorId}`]);
+  }
+
+  attachmentsIndicatorIndex: IndicatorIndexModel = new IndicatorIndexModel(0,0,'','','');
+  @ViewChild('attachmentsWindow') attachmentsWindow: TemplateRef<any>;
+  attachmentsWindowRef: NbWindowRef;
+  public openAttachmentsWindow(indicatorIndex: IndicatorIndexModel) {
+    this.attachmentsIndicatorIndex = indicatorIndex;
+    this.attachmentsWindowRef = this.windowService.open(
+      this.attachmentsWindow, { title: 'Приложить свидетельства' }
+    );
+  }
+
+  public applyAttachmentsIndicatorIndex() {
+    this.attachmentsWindowRef.close();
+    this.showToast('Данные обновлены', 'info');
   }
 }

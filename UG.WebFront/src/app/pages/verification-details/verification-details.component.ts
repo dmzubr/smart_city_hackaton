@@ -73,4 +73,11 @@ export class VerificationDetailsComponent implements OnInit {
       this.records = this.allRecords;
     }
   }
+
+  public markRecordAsNotAggressive(record: SocialVerificationRecordModel) {
+    this.showToast('Запись помечена как не имеющая признаков негативного выражения.', 'danger');
+    this.records = this.allRecords.filter(x => {
+      x.sNCommentId != record.sNCommentId && x.sNWallPostId != record.sNWallPostId
+    });
+  }
 }
