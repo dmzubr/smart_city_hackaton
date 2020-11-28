@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xxl-12">
+    <nb-card>
+      <nb-card-header>
+        <span>Значение метрик из внешних источников</span>
+      </nb-card-header>
+
+      <nb-card-body>
+
+        <div class="row">
+          <table class="table">
+            <tr>
+              <th>Метрика</th>
+              <th>Город</th>
+              <th>Год</th>
+              <th>Значение</th>
+            </tr>
+            <tr *ngFor="let metric of metricValues">
+              <th>{{metric.metricName}}</th>
+              <th>{{metric.cityName}}</th>
+              <th>{{metric.year}}</th>
+              <th>{{metric.value}}</th>
+            </tr>
+          </table>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

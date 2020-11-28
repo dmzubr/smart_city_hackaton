@@ -10,7 +10,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Источники метрик',
     icon: 'plus-outline',
-    link: '/pages/outer-data-sources',
-    home: false
+    home: false,
+    link: '/pages/outer-data-sources'
   }
 ];

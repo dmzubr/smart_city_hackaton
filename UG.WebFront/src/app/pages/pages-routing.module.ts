@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { IndicatorsListComponent } from './indicators-list/indicators-list.component';
 import { OuterDataSourcesComponent } from './outer-data-sources/outer-data-sources.component';
+import { OuterMetricValuesComponent } from './outer-metric-values/outer-metric-values.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +17,10 @@ const routes: Routes = [{
     {
       path: 'outer-data-sources',
       component: OuterDataSourcesComponent
+    },
+    {
+      path: 'outer-metric-values/:metric-id',
+      component: OuterMetricValuesComponent
     }
   ],
 }];

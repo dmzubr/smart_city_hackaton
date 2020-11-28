@@ -27,6 +27,11 @@ namespace UG.ORM
 
     public interface IOuterMetricCityValueService : ISimpleCRUDService<OuterMetricCityValue>
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outerMetricId"></param>
+        /// <returns></returns>
+        Task<IEnumerable<OuterMetricValueViewModel>> GetVMListByMetric(long outerMetricId);
     }
 }

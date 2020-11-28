@@ -48,7 +48,7 @@
               <div class="col-8">
                 <nb-select fullWidth placeholder="Выберите субиндексы" multiple [(selected)]="filteredSubindexes">
                   <nb-option *ngFor="let sub of subIndexesAllList"
-                             (click)="applyFilters(subindexId)"
+                             (click)="applyFilters()"
                              [value]="sub.subIndexId">{{sub.name}}</nb-option>
                 </nb-select>
               </div>
@@ -56,19 +56,15 @@
           </div>
 
           <div class="col-md-6">
-            <!--
             <div class="row">
-              <div class="col-4 text-center">
-                Фильтровать по индикаторам
-              </div>
-              <div class="col-8">
-                <nb-select fullWidth placeholder="Выберите индикаторы" multiple [(selected)]="filteredIndicators">
-                  <nb-option *ngFor="let category of categoriesList"
-                             (click)="applyFilters()"
-                             [value]="category.complaintCategoryId">{{category.displayName}}</nb-option>
-                </nb-select>
-              </div>
-            </div>-->
+              <button nbButton status="primary"
+                      [disabled]="editIndexesChanges.length == 0"
+                      class="mat-ripple appearance-hero size-medium status-primary shape-rectangle ng-star-inserted nb-transition"
+                      style="margin-top: 5px;"
+                      (click)="applyIndicatorChanges()">
+                <span >Сохранить изменения</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -107,21 +103,36 @@
                   <th>№</th>
                   <th>Индикатор</th>
                   <th>Базовый показатель</th>
-                  <th>Отчётный год</th>
+                  <th>Отчётный год: {{selectedYear}}</th>
                   <th>Верификация</th>
                 </tr>
                 <tr>
                   <td>{{indicator.number}}</td>
                   <td>{{indicator.name}}</td>
-                  <td>{{selectedYear}}</td>
-                  <td>{{getIndicatorValue(indicator.indicatorId, 2020)}}</td>
+                  <td></td>
+                  <td>
+                    {{getIndicatorValue(indicator.indicatorId, selectedYear)}}
+                  </td>
                   <td>+</td>
                 </tr>
                 <tr *ngFor="let indicatorIndex of indicator.indicatorIndexes">
                   <td></td>
                   <td></td>
                   <td>{{indicatorIndex.number}}&nbsp;{{indicatorIndex.name}}</td>
-                  <td>{{getIndicatorIndexValue(indicatorIndex.indicatorIndexId, selectedYear)}}</td>
+                  <td>
+                    <span>{{getIndicatorIndexValue(indicatorIndex.indicatorIndexId, selectedYear)}}</span>
+                    <div *ngIf="userHelper.IsInRole('region_manager')">
+                      <span *ngIf="editedIndicatorIndexId !== indicatorIndex.indicatorIndexId
+                        && getIndicatorIndexValue(indicatorIndex.indicatorIndexId, selectedYear).length == 0">
+                        <nb-icon icon="plus-circle-outline" (click)="setEditedIndicatorIndex(indicatorIndex)"></nb-icon>
+                      </span>
+                      <input nbInput fullWidth placeholder="Введите значение"
+                             *ngIf="editedIndicatorIndexId == indicatorIndex.indicatorIndexId"
+                             type="number"
+                             class="input-full-width size-medium status-basic shape-rectangle nb-transition"
+                             [(ngModel)]="editedIndicatorIndexValue" />
+                    </div>
+                  </td>
                   <td></td>
                 </tr>
               </table>

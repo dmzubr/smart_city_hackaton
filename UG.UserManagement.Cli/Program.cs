@@ -28,15 +28,15 @@ namespace UG.Utils.Cli
 
         static async Task Main(string[] args)
         {
-            await ImportCitiesList();
+            await CreateUser();
         }
 
         private static async Task CreateUser()
         {
             var srv = GetServiceInstance<IUserCreatorService>();
-            var userName = "presto";
-            var pass = "37presto98";
-            var rolesList = new string[] { "bot_company_manager" };
+            var userName = "region_manager";
+            var pass = "01region_manager01";
+            var rolesList = new string[] { "region_manager" };
             await srv.CreateUserRecord(userName, pass, rolesList);
         }
 
@@ -131,6 +131,7 @@ namespace UG.Utils.Cli
                     .AsPublicImplementedInterfaces();
             }
 
+            services.Configure<AspNetCore.Identity.MySQLDapper.Configuration.ConnectionStringsConfiguration>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<ConnectionStringsConfiguration>(Configuration.GetSection("ConnectionStrings"));
             _serviceProvider = services.BuildServiceProvider();
         }

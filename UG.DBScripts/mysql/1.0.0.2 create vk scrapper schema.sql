@@ -81,6 +81,7 @@ CREATE TABLE `SNUser` (
   `FirstName` varchar(128),
   `LastName` varchar(128),
   `City` varchar(256),
+  `Phone` varchar(128),
   `FriendsQuantity` INT NULL DEFAULT NULL,
   `LastModifiedDateTime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`SNUserId`),

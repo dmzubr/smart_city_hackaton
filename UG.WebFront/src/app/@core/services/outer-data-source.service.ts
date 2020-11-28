@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { BaseAPIService } from './base-api.service';
-import { OuterDataSourceModelViewModel } from '../model/';
+import {OuterDataSourceModelViewModel, OuterMetricValueViewModel} from '../model/';
 
 @Injectable()
 export class OuterDataSourceService extends BaseAPIService {

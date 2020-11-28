@@ -55,7 +55,7 @@ CREATE TABLE `OuterMetricCityValue` (
   `OuterMetricCityValueId` bigint NOT NULL AUTO_INCREMENT,
   `OuterMetricId` bigint NOT NULL,
   `CityId` int NOT NULL,
-  `Value` decimal NOT NULL,
+  `Value` decimal(12,4) NOT NULL,
   `CalcDate` datetime NULL DEFAULT NULL,
   `PeriodStart` datetime NOT NULL,
   `PeriodEnd` datetime NOT NULL DEFAULT current_timestamp,
@@ -72,7 +72,7 @@ CREATE TABLE `IndicatorIndexCityValue` (
   `IndicatorIndexCityValueId` bigint NOT NULL AUTO_INCREMENT,
   `IndicatorIndexId` bigint NOT NULL,
   `CityId` int NOT NULL,
-  `Value` decimal NOT NULL,
+  `Value` decimal(12,4) NOT NULL,
   `CalcDate` datetime NULL DEFAULT NULL,
   `PeriodStart` datetime NOT NULL,
   `PeriodEnd` datetime NOT NULL DEFAULT current_timestamp,
@@ -88,8 +88,8 @@ DROP TABLE IF EXISTS `IndicatorCityValue`;
 CREATE TABLE `IndicatorCityValue` (
   `IndicatorCityValueId` bigint NOT NULL AUTO_INCREMENT,
   `IndicatorId` bigint NOT NULL,
-  `CityId` bigint NOT NULL,
-  `Value` decimal NOT NULL,
+  `CityId` int NOT NULL,
+  `Value` decimal(12,4) NOT NULL,
   `CalcDate` datetime NULL DEFAULT NULL,
   `PeriodStart` datetime NOT NULL,
   `PeriodEnd` datetime NOT NULL,
@@ -101,19 +101,12 @@ CREATE TABLE `IndicatorCityValue` (
  	CONSTRAINT `City_IndicatorValues` FOREIGN KEY (`CityId`)  REFERENCES `City` (`CityId`) ON DELETE CASCADE ON UPDATE NO ACTION
 )ENGINE = InnoDB;
 
-ALTER TABLE `Category` 
-ADD COLUMN `IndicatorId` BIGINT NOT NULL AFTER `Name`;
-ALTER TABLE `Category` 
-ADD INDEX `Indicator_Categories_idx` (`IndicatorId` ASC);
-ALTER TABLE `Category` 
-ADD CONSTRAINT `Indicator_Categories`  FOREIGN KEY (`IndicatorId`)  REFERENCES `Indicator` (`IndicatorId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 DROP TABLE IF EXISTS `IndicatorSocialVerification`;
 CREATE TABLE `IndicatorSocialVerification` (
   `IndicatorSocialVerificationId` bigint NOT NULL AUTO_INCREMENT,
   `IndicatorId` bigint NOT NULL,
   `CityId` int NOT NULL,
-  `Value` decimal NOT NULL,
+  `Value` decimal(12,4) NOT NULL,
   `CalcDate` datetime NULL DEFAULT NULL,
   `PeriodStart` datetime NOT NULL,
   `PeriodEnd` datetime NOT NULL,
@@ -125,7 +118,6 @@ CREATE TABLE `IndicatorSocialVerification` (
  	CONSTRAINT `City_SocialVerificationValues` FOREIGN KEY (`CityId`)  REFERENCES `City` (`CityId`) ON DELETE CASCADE ON UPDATE NO ACTION
 )ENGINE = InnoDB;
 
-USE `smartcity`;
 DROP TABLE IF EXISTS `OuterMetricDataSource`;
 CREATE TABLE `OuterMetricDataSource` (
   `OuterMetricDataSourceId` bigint NOT NULL AUTO_INCREMENT,  

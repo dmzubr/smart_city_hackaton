@@ -28,29 +28,23 @@ export class PagesComponent {
     }
     else  {
       const commonRoutesList = [
+        '/pages/indicators-list',
       ];
-      const managerRoutesList = [
-        '/pages/complaints',
-        '/pages/complaints/-1',
-        '/pages/manage-attributes'
+      const regionalManagerRoutesList = [
+
       ];
-      const botManagerRoutesList = [
-        '/pages/bot-forms',
-      ];
-      const citizenRoutesList = [
+      const centralManagerRoutesList = [
+        '/pages/outer-data-sources'
       ];
 
       for(let item of start_menu) {
         if (commonRoutesList.indexOf(item.link) > -1 || item.group || item.children)
           resList.push(item);
 
-        if (this.userHelper.IsInRole('manager') && managerRoutesList.indexOf(item.link) > -1)
+        if (this.userHelper.IsInRole('region_manager') && regionalManagerRoutesList .indexOf(item.link) > -1)
           resList.push(item);
 
-        if (this.userHelper.IsInRole('citizen') && citizenRoutesList.indexOf(item.link) > -1)
-          resList.push(item);
-
-        if (this.userHelper.IsInRole('bot_company_manager') && botManagerRoutesList.indexOf(item.link) > -1)
+        if (this.userHelper.IsInRole('central_manager') && centralManagerRoutesList.indexOf(item.link) > -1)
           resList.push(item);
       }
     }

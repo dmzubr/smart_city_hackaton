@@ -31,4 +31,8 @@ export class OuterDataSourcesComponent implements OnInit {
       this.dataSourcesList = res;
     });
   }
+
+  public openMetricValues(outerMetricId: number) {
+    this.router.navigate([`pages/outer-metric-values/${outerMetricId}`]);
+  }
 }

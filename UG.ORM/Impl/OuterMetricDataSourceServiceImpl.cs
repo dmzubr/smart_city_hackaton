@@ -23,7 +23,7 @@ SELECT
     M.Name as MetricName
 FROM
     `OuterMetric` M INNER JOIN
-    `OuterMetricDataSource` S;";
+    `OuterMetricDataSource` S ON S.OuterMetricId=M.OuterMetricId;";
             var res = await conn.QueryAndCloseConnAsync<OuterMetricDataSourceViewModel>(sql);            
             return res;
         }

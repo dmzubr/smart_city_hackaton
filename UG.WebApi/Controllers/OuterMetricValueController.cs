@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Serilog;
 using UG.ORM;
 
 namespace UG.WebApi.Controllers
@@ -42,6 +42,8 @@ namespace UG.WebApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> HandleScrapperOne([FromBody] MetricValueSubmitBodyModel req)
         {
+            Log.Debug("HandleScrapperOne req body is: {@req}", req);
+
             var metricsRecs = await this._outerMetricService.GetList();
 
             var receivedMetricsCodes = req.values.Select(X => X.metric_code);            
@@ -83,6 +85,14 @@ namespace UG.WebApi.Controllers
                 res.succsesfully_created++;
             }
 
+            return Json(res);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin,region_manager,central_manager")]
+        public async Task<IActionResult> GetValuesByMetric([FromQuery] long outerMetricId)
+        {
+            var res = await this._outerMetricCityValueService.GetVMListByMetric(outerMetricId);
             return Json(res);
         }
     }

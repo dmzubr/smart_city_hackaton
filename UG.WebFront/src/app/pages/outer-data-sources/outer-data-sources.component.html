@@ -13,11 +13,17 @@
               <th>Метрика</th>
               <th>Обработчик</th>
               <th>URL</th>
+              <th>Перейти к значениям</th>
             </tr>
             <tr *ngFor="let dataSource of dataSourcesList">
-              <th>{{dataSource.metricName}}</th>
-              <th>{{dataSource.name}}</th>
-              <th>{{dataSource.handlerUrl}}</th>
+              <td>{{dataSource.metricName}}</td>
+              <td>{{dataSource.name}}</td>
+              <td>{{dataSource.handlerUrl}}</td>
+              <td>
+                <span>
+                  <nb-icon icon="external-link-outline" (click)="openMetricValues(dataSource.outerMetricId)"></nb-icon>
+                </span>
+              </td>
             </tr>
           </table>
         </div>
