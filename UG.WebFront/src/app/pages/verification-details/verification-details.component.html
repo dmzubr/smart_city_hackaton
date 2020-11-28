@@ -40,7 +40,6 @@
             <th>Дата публикации</th>
             <th>Текст</th>
             <th>Тип записи</th>
-            <th>Ссылка</th>
             <th>Лайков</th>
             <th>Комментариев</th>
             <th>Действия</th>
@@ -51,7 +50,6 @@
             <td>{{record.publishDateTime | date:'dd.MM.yyyy HH:mm:ss'}}</td>
             <td>{{record.text}}</td>
             <td>{{record.sNCommentId > 0 ? "Комментарий" : "Пост"}}</td>
-            <td>{{record.url}}</td>
             <td>{{record.likesQuantity}}</td>
             <td>{{record.commentQuantity}}</td>
             <td>

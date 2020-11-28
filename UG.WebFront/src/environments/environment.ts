@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  backendRoot: 'http://localhost:5000/api',
-  // backendRoot: 'https://smart-city-hack-back.cashee.ru/api',
+  // backendRoot: 'http://localhost:5000/api',
+  backendRoot: 'https://smart-city-hack-back.cashee.ru/api',
 };
