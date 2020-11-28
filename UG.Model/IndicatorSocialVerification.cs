@@ -26,4 +26,11 @@ namespace UG.Model
         
         public DateTime PeriodEnd { get; set; }
     }
+
+    public class IndicatorSocialVerificationExtendedModel : IndicatorSocialVerification
+    {
+        public int RatingPosition { get; set; }
+
+        public int RatingClass { get; set; }
+    }
 }

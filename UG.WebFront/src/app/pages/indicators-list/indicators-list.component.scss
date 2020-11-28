@@ -1,11 +1,14 @@
-.complaints-list {
-  tr.control-danger td {
+.rows-list {
+  td.rating-1 {
     background-color: #7e002e;
+    text-align: center;
   }
-  tr.control-warn td {
+  td.rating-2 {
     background-color: #ffbe43;
+    text-align: center;
   }
-  tr.control-ok td {
+  td.rating-3 {
     background-color: #175306;
+    text-align: center;
   }
 }

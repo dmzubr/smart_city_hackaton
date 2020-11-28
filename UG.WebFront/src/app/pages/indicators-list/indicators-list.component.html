@@ -14,10 +14,10 @@
                 Отобрать по городу
               </div>
               <div class="col-8">
-                <nb-select fullWidth placeholder="Выберите город" [(selected)]="selectedCityId">
+                <nb-select fullWidth placeholder="Выберите город" [(selected)]="selectedCityId" #selectCity>
                   <nb-option *ngFor="let city of citiesList"
                              (click)="applyFilters()"
-                             [value]="city.cityTypeId">{{city.name}}</nb-option>
+                             [value]="city.cityId">{{city.name}}</nb-option>
                 </nb-select>
               </div>
             </div>
@@ -56,6 +56,7 @@
           </div>
 
           <div class="col-md-6">
+            <!--
             <div class="row">
               <button nbButton status="primary"
                       [disabled]="editIndexesChanges.length == 0"
@@ -65,31 +66,14 @@
                 <span >Сохранить изменения</span>
               </button>
             </div>
+            -->
           </div>
         </div>
-
-        <!--
-        <div class="row" style="margin-top: 10px;">
-          <div class="col-md-6">
-            <button nbButton status="primary"
-                    class="mat-ripple appearance-hero size-medium status-primary shape-rectangle ng-star-inserted nb-transition"
-                    style="margin-top: 5px;"
-                    (click)="switchControlMode()">
-              <span *ngIf="!controlModeActivated">На контроле</span>
-              <span *ngIf="controlModeActivated">Все записи</span>
-            </button>
-          </div>
-        </div> -->
 
       </nb-card-body>
     </nb-card>
 
     <nb-card>
-      <!--
-      <nb-card-header>
-        <span>Обращения</span>
-      </nb-card-header>
-      -->
 
       <nb-accordion *ngIf="selectedCityId > 0">
         <nb-accordion-item *ngFor="let subindex of subIndexesList">
@@ -98,7 +82,7 @@
           </nb-accordion-item-header>
           <nb-accordion-item-body>
             <div class="row" *ngFor="let indicator of subindex.indicatorsList">
-              <table class="table">
+              <table class="table rows-list">
                 <tr>
                   <th>№</th>
                   <th>Индикатор</th>
@@ -113,7 +97,12 @@
                   <td>
                     {{getIndicatorValue(indicator.indicatorId, selectedYear)}}
                   </td>
-                  <td>+</td>
+                  <td [ngClass]="{
+                    'rating-1': isIndicatorHasRatingClass(indicator, 1),
+                    'rating-2': isIndicatorHasRatingClass(indicator, 2),
+                    'rating-3': isIndicatorHasRatingClass(indicator, 3)}">
+                    {{getIndicatorSocialVerificationStr(indicator.indicatorId)}}
+                  </td>
                 </tr>
                 <tr *ngFor="let indicatorIndex of indicator.indicatorIndexes">
                   <td></td>

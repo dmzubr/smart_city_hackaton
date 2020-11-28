@@ -42,6 +42,6 @@ namespace UG.Model
     {
         public IList<IndicatorValueModel> indicatorValuesList { get; set; }
 
-        public IList<IndicatorIndexValueModel> indicatorIndexesValuesList { get; set; }
+        public IList<IndicatorIndexValueModel> indicatorIndexesValuesList { get; set; }        
     }
 }

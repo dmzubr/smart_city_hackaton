@@ -4,18 +4,20 @@ import { Router } from '@angular/router';
 import { SubindexService, IndicatorValueService, CityService } from '../../@core/services'
 import {
   SubindexViewModel, ValuesContainerModel, CityModel,
-  IndicatorIndexValueModel
+  IndicatorIndexValueModel, IndicatorSocialVerificationModel, IndicatorViewModel
 } from "../../@core/model";
 import { NbGlobalPhysicalPosition, NbToastrService } from "@nebular/theme";
 import {UserContextHelper} from "../../@core/utils";
 import {IndicatorIndexValueService} from "../../@core/services/indicator-index-value.service";
+import {IndicatorSocialVerificationService} from "../../@core/services/indicator-social-verification.service";
 
 @Component({
   selector: 'indicators-list',
   templateUrl: './indicators-list.component.html',
   styleUrls: ['./indicators-list.component.scss'],
   providers:[
-    SubindexService, IndicatorValueService, CityService, IndicatorIndexValueService
+    SubindexService, IndicatorValueService, CityService, IndicatorIndexValueService,
+    IndicatorSocialVerificationService
   ]
 })
 export class IndicatorsListComponent implements OnInit {
@@ -23,6 +25,7 @@ export class IndicatorsListComponent implements OnInit {
   public subIndexesAllList: SubindexViewModel[] = [];
   public subIndexesList: SubindexViewModel[] = [];
   private valuesContainer: ValuesContainerModel = this.indicatorValueService.GetEmptyContainer();
+  public socialVerificationsList: IndicatorSocialVerificationModel[] = [];
 
   public citiesList: CityModel[] = [];
   public selectedCityId: number = 0;
@@ -42,6 +45,7 @@ export class IndicatorsListComponent implements OnInit {
     private indicatorValueService: IndicatorValueService,
     private indicatorIndexValueService: IndicatorIndexValueService,
     private cityService: CityService,
+    private socialVerificationService: IndicatorSocialVerificationService,
     private toastrService: NbToastrService,
     private router: Router){ }
 
@@ -49,6 +53,7 @@ export class IndicatorsListComponent implements OnInit {
     this._initLookups();
     this._initSubindexesList();
     this._initValuesList();
+    this._initSocialVerificationMarks();
   }
 
   private showToast(msg, status) {
@@ -63,7 +68,6 @@ export class IndicatorsListComponent implements OnInit {
     this.subindexService.GetVMList().subscribe(res => {
       this.subIndexesList = res;
       this.subIndexesAllList = res;
-      // this.filteredSubindexes = res.map(x => x.subIndexId);
     });
   }
 
@@ -77,6 +81,13 @@ export class IndicatorsListComponent implements OnInit {
     this.cityService.GetList().subscribe(res => {
       this.citiesList = res;
     });
+  }
+
+  private _initSocialVerificationMarks() {
+    this.socialVerificationService.GetList(+this.selectedYear).subscribe(res => {
+      this.socialVerificationsList = res;
+    });
+
   }
 
   public getIndicatorValue(indicatorId: number, year: number) {
@@ -97,9 +108,10 @@ export class IndicatorsListComponent implements OnInit {
     return '';
   }
 
-  public applyFilters(s) {
+  public applyFilters() {
     this.subIndexesList = this.subIndexesAllList.filter(x => this.filteredSubindexes.indexOf(x.subIndexId)>-1);
     this.showToast('Данные обновлены', 'info');
+    console.log('Selected city: ' + this.selectedCityId);
   }
 
   editedIndicatorIndexId: number = -1;
@@ -140,5 +152,26 @@ export class IndicatorsListComponent implements OnInit {
       else
         this.showToast('Что-то пошло не так', 'warn');
     });
+  }
+
+  public isIndicatorHasRatingClass(indicator: IndicatorViewModel, checkedRatingClass) {
+    let relatedIndicatorSocValues = this.socialVerificationsList.filter(x =>
+      x.indicatorId == indicator.indicatorId && x.cityId == this.selectedCityId);
+    let res = false;
+    if (relatedIndicatorSocValues.length > 0)
+      res = relatedIndicatorSocValues[0].ratingClass == checkedRatingClass;
+    // console.log('Check verif: ' + checkedRatingClass);
+    // console.log(indicator.indicatorId + ' ' + res);
+    return res;
+  }
+
+  public getIndicatorSocialVerificationStr(indicatorId: number) {
+    let relatedIndicatorSocValues = this.socialVerificationsList.filter(x =>
+      x.indicatorId == indicatorId && x.cityId == this.selectedCityId);
+    if (relatedIndicatorSocValues.length > 0) {
+      return (this.socialVerificationsList.length - relatedIndicatorSocValues[0].ratingPosition + 1).toString()
+        + '/' + this.socialVerificationsList.length;
+    }
+    return null;
   }
 }

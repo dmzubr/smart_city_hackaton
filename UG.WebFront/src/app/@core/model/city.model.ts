@@ -1,6 +1,6 @@
 export class CityModel {
     public constructor(
-      public сityId: number,
+      public cityId: number,
       public regionId: number,
       public cityTypeId: number,
       public name: string,
