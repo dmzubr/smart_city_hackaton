@@ -94,14 +94,14 @@
                   <td>{{indicator.number}}</td>
                   <td>{{indicator.name}}</td>
                   <td></td>
-                  <td>
-                    {{getIndicatorValue(indicator.indicatorId, selectedYear)}}
-                  </td>
+                  <td>{{getIndicatorValue(indicator.indicatorId, selectedYear)}}</td>
                   <td [ngClass]="{
                     'rating-1': isIndicatorHasRatingClass(indicator, 1),
                     'rating-2': isIndicatorHasRatingClass(indicator, 2),
                     'rating-3': isIndicatorHasRatingClass(indicator, 3)}">
-                    {{getIndicatorSocialVerificationStr(indicator.indicatorId)}}
+                    <span (click)="goToIndicatorVerification(indicator)">
+                      {{getIndicatorSocialVerificationStr(indicator.indicatorId)}}
+                    </span>
                   </td>
                 </tr>
                 <tr *ngFor="let indicatorIndex of indicator.indicatorIndexes">

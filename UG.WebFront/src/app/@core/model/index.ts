@@ -6,4 +6,5 @@ export * from './indicator-index-value.model';
 export * from './indicator-social-verification.model';
 export * from './outer-data-source.model';
 export * from './outer-metric-city-value.model';
+export * from './social-verification.model';
 export * from './subindex.model';

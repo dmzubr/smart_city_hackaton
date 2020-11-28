@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { IndicatorsListComponent } from './indicators-list/indicators-list.component';
 import { OuterDataSourcesComponent } from './outer-data-sources/outer-data-sources.component';
 import { OuterMetricValuesComponent } from './outer-metric-values/outer-metric-values.component';
+import { VerificationDetailsComponent } from './verification-details/verification-details.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,10 @@ const routes: Routes = [{
     {
       path: 'outer-metric-values/:metric-id',
       component: OuterMetricValuesComponent
+    },
+    {
+      path: 'verify-indicator/:indicator-id',
+      component: VerificationDetailsComponent
     }
   ],
 }];

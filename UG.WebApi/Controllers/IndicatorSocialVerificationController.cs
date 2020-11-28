@@ -42,10 +42,18 @@ namespace UG.WebApi.Controllers
                 double ceiling = Math.Ceiling(quotient);
                 int ratingClass = (int)ceiling;
 
-                resList[i].RatingClass = ratingClass; //(pos+1 / classLength) + 1;
+                resList[i].RatingClass = ratingClass;
             }            
             
             return Json(resList);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin,region_manager,central_manager")]
+        public async Task<IActionResult> GetSocialRecordsListByIndicator([FromQuery] long indicatorId)
+        {
+            var res = await this._indicatorSocialVerification.GetCommonSocialRecordsList(indicatorId);
+            return Json(res);
         }
     }
 }

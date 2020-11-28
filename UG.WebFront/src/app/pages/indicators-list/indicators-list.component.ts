@@ -174,4 +174,8 @@ export class IndicatorsListComponent implements OnInit {
     }
     return null;
   }
+
+  public goToIndicatorVerification(indicator: IndicatorViewModel) {
+    this.router.navigate([`pages/verify-indicator/${indicator.indicatorId}`]);
+  }
 }
