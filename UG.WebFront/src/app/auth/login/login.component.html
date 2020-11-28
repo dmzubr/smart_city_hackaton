@@ -1,0 +1,74 @@
+<h1 id="title" class="title">Вход</h1>
+<p class="sub-title">Войдите в систему под учетной записью.</p>
+
+<nb-alert *ngIf="errors.length" outline="danger" role="alert">
+  <p class="alert-title"><b>Ошибка!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert *ngIf="messages.length" outline="success" role="alert">
+  <p class="alert-title"><b>Оk!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+  </ul>
+</nb-alert>
+
+<form (ngSubmit)="submitForm()" #form="ngForm" aria-labelledby="title">
+
+  <div class="form-control-group">
+    <label class="label" for="input-email">Email:</label>
+    <input nbInput
+           fullWidth
+           [(ngModel)]="user.email"
+           class="input-full-width size-medium status-basic shape-rectangle nb-transition"
+           #email="ngModel"
+           name="email"
+           id="input-email"
+           placeholder="Имя пользователя"
+           autofocus
+           status=""
+           required="true">
+    <ng-container *ngIf="email.invalid && email.touched">
+      <p class="error-message" *ngIf="email.errors?.required">
+        Обязательное поле!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-password">Password:</label>
+    <input nbInput
+           fullWidth
+           [(ngModel)]="user.password"
+           class="input-full-width size-medium status-basic shape-rectangle nb-transition"
+           #password="ngModel"
+           name="password"
+           type="password"
+           id="input-password"
+           placeholder="Password"
+           status=""
+           required="true"
+           [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+    <ng-container *ngIf="password.invalid && password.touched ">
+      <p class="error-message" *ngIf="password.errors?.required">
+        Обязательное поле!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group accept-group">
+    <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe" *ngIf="rememberMe">Запомнить меня</nb-checkbox>
+    <a class="forgot-password" routerLink="../request-password">Забыли пароль?</a>
+  </div>
+
+  <button nbButton [nbSpinner]="loading" nbSpinnerMessage="" nbSpinnerSize="xlarge"
+          fullWidth
+          status="success"
+          class="mat-ripple appearance-hero size-medium status-success shape-rectangle ng-star-inserted nb-transition"
+          [disabled]="!form.valid || loading"
+          [class.btn-pulse]="loading">
+    Войти
+  </button>
+</form>

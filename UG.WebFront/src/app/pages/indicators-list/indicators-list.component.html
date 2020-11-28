@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-xxl-12">
+    <nb-card>
+      <nb-card-header>
+        <span>Фильтры</span>
+      </nb-card-header>
+
+      <nb-card-body>
+
+        <!--
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <div class="col-4 text-center">
+                Сортировать по
+              </div>
+              <div class="col-8">
+                <nb-select fullWidth placeholder="Выберите поле для сортировки" [(selected)]="selectedSortMode">
+                  <nb-option *ngFor="let sortItem of sortItemsList"
+                             (click)="changeSortMode()"
+                             [value]="sortItem.id">{{sortItem.value}}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="row">
+              <div class="col-4 text-center">
+                Фильтровать по статусу
+              </div>
+              <div class="col-8">
+                <nb-select fullWidth placeholder="Статус обращения" multiple [(selected)]="filteredStatuses">
+                  <nb-option *ngFor="let status of statusesList"
+                             (click)="applyFilters()"
+                             [value]="status.complaintStatusId">{{status.displayName}}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-4 text-center">
+                Фильтровать по подразделению
+              </div>
+              <div class="col-8">
+                <nb-select fullWidth placeholder="Выберите подразделения" multiple [(selected)]="filteredDepartments">
+                  <nb-option *ngFor="let department of departmentsList"
+                             (click)="applyFilters()"
+                             [value]="department.departmentId">{{department.name}}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-4 text-center">
+                Фильтровать по категории
+              </div>
+              <div class="col-8">
+                <nb-select fullWidth placeholder="Выберите категории" multiple [(selected)]="filteredCategories">
+                  <nb-option *ngFor="let category of categoriesList"
+                             (click)="applyFilters()"
+                             [value]="category.complaintCategoryId">{{category.displayName}}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+          <div class="col-md-6">
+            <button nbButton status="primary"
+                    class="mat-ripple appearance-hero size-medium status-primary shape-rectangle ng-star-inserted nb-transition"
+                    style="margin-top: 5px;"
+                    (click)="switchControlMode()">
+              <span *ngIf="!controlModeActivated">На контроле</span>
+              <span *ngIf="controlModeActivated">Все записи</span>
+            </button>
+          </div>
+        </div> -->
+
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card>
+      <!--
+      <nb-card-header>
+        <span>Обращения</span>
+      </nb-card-header>
+      -->
+
+      <nb-accordion>
+        <nb-accordion-item *ngFor="let subindex of subIndexesList">
+          <nb-accordion-item-header>
+            {{subindex.name}}
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="row" *ngFor="let indicator of subindex.indicatorsList">
+              <table class="table">
+                <tr>
+                  <th>№</th>
+                  <th>Индикатор</th>
+                  <th>Базовый показатель</th>
+                  <th>Отчётный год</th>
+                  <th>Верификация</th>
+                </tr>
+                <tr>
+                  <td>{{indicator.number}}</td>
+                  <td>{{indicator.name}}</td>
+                  <td></td>
+                  <td>{{getIndicatorValue(indicator.indicatorId, 2020)}}</td>
+                  <td>+</td>
+                </tr>
+                <tr *ngFor="let indicatorIndex of indicator.indicatorIndexes">
+                  <td></td>
+                  <td></td>
+                  <td>{{indicatorIndex.number}}&nbsp;{{indicatorIndex.name}}</td>
+                  <td>{{getIndicatorIndexValue(indicatorIndex.indicatorIndexId, 2020)}}</td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+
+      <!--
+      <table class="table complaints-list">
+        <tr>
+          <th>Дата созадания</th>
+          <th>Статус</th>
+          <th>Первичный текст</th>
+          <th>Категория</th>
+          <th>ФИО заявителя</th>
+          <th>Откуда</th>
+          <th>Подразделение</th>
+          <th>Ответственный</th>
+          <th>Дата контроля</th>
+        </tr>
+        <tr *ngFor="let complaint of complaintsList" (click)="goToComplaint(complaint.complaintId)"
+            [ngClass]="{
+            'control-ok': isControlClass(complaint, 'control-ok'),
+            'control-warn': isControlClass(complaint, 'control-warn'),
+            'control-danger': isControlClass(complaint, 'control-danger')}">
+          <td>{{complaint.createdDate | date:'dd.MM.yyyy hh:mm:ss'}}</td>
+          <td>{{complaint.statusName}}</td>
+          <td>{{complaint.initialSrcText}}</td>
+          <td>{{complaint.complaintCategoryName}}</td>
+          <td>{{complaint.complainerFullName}}</td>
+          <td>{{complaint.complaintChannelName}}</td>
+          <td>{{complaint.departmentName}}</td>
+          <td>{{complaint.executorFullName}}</td>
+          <td>{{complaint.controlDate | date:'dd.MM.yyyy'}}</td>
+        </tr>
+      </table>
+      -->
+    </nb-card>
+  </div>
+</div>

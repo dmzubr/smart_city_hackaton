@@ -1,0 +1,27 @@
+/*.pem
+*/.vs/*
+*./*.csproj.user
+bckp/*
+
+*/*.bat
+
+*/bin/*
+*/obj/*
+*/logs/*
+*/Deployment/*
+*/.idea/*
+*/*appsettings*
+*/*/.vs/*
+
+# Web UI project
+UG.WebFront/node_modules/*
+UG.WebFront/dist/*
+
+# Organizational artifacts
+metadata/*
+
+# Py microservices
+UG.PyServices/*/.idea/*
+UG.PyServices/*/__pycache__/*
+UG.PyServices/*/env/*
+UG.PyServices/*/config*.yaml
