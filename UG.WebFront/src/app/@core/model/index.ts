@@ -1,3 +1,4 @@
+export * from './city.model';
 export * from './indicator.model';
 export * from './indicator-value.model';
 export * from './indicator-index.model';
