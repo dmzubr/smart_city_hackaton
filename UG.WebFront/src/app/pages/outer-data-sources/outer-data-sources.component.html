@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-xxl-12">
+    <nb-card>
+      <nb-card-header>
+        <span>Источники данных внешних метрик</span>
+      </nb-card-header>
+
+      <nb-card-body>
+
+        <div class="row">
+          <table class="table">
+            <tr>
+              <th>Метрика</th>
+              <th>Обработчик</th>
+              <th>URL</th>
+            </tr>
+            <tr *ngFor="let dataSource of dataSourcesList">
+              <th>{{dataSource.metricName}}</th>
+              <th>{{dataSource.name}}</th>
+              <th>{{dataSource.handlerUrl}}</th>
+            </tr>
+          </table>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

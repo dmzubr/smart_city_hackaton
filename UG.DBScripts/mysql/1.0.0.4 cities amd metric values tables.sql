@@ -108,12 +108,11 @@ ADD INDEX `Indicator_Categories_idx` (`IndicatorId` ASC);
 ALTER TABLE `Category` 
 ADD CONSTRAINT `Indicator_Categories`  FOREIGN KEY (`IndicatorId`)  REFERENCES `Indicator` (`IndicatorId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-USE `smartcity`;
 DROP TABLE IF EXISTS `IndicatorSocialVerification`;
 CREATE TABLE `IndicatorSocialVerification` (
   `IndicatorSocialVerificationId` bigint NOT NULL AUTO_INCREMENT,
   `IndicatorId` bigint NOT NULL,
-  `CityId` bigint NOT NULL,
+  `CityId` int NOT NULL,
   `Value` decimal NOT NULL,
   `CalcDate` datetime NULL DEFAULT NULL,
   `PeriodStart` datetime NOT NULL,
@@ -124,6 +123,19 @@ CREATE TABLE `IndicatorSocialVerification` (
  	CONSTRAINT `Indicator_SocialVerificationValues` FOREIGN KEY (`IndicatorId`)  REFERENCES `Indicator` (`IndicatorId`) ON DELETE CASCADE ON UPDATE NO ACTION,
   KEY `City_SocialVerificationValues` (`CityId`),
  	CONSTRAINT `City_SocialVerificationValues` FOREIGN KEY (`CityId`)  REFERENCES `City` (`CityId`) ON DELETE CASCADE ON UPDATE NO ACTION
+)ENGINE = InnoDB;
+
+USE `smartcity`;
+DROP TABLE IF EXISTS `OuterMetricDataSource`;
+CREATE TABLE `OuterMetricDataSource` (
+  `OuterMetricDataSourceId` bigint NOT NULL AUTO_INCREMENT,  
+  `OuterMetricId` bigint NOT NULL,
+  `Name` varchar(1024) NOT NULL,
+  `HandlerUrl` varchar(2048) NOT NULL,  
+  PRIMARY KEY (`OuterMetricDataSourceId`),
+  UNIQUE INDEX `OuterMetricDataSourceId` (`OuterMetricDataSourceId` ASC),
+  KEY `OuterMetric_DataSources` (`OuterMetricId`),
+ 	CONSTRAINT `OuterMetric_DataSources` FOREIGN KEY (`OuterMetricId`)  REFERENCES `OuterMetric` (`OuterMetricId`) ON DELETE CASCADE ON UPDATE NO ACTION
 )ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;

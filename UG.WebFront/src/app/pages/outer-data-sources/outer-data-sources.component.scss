@@ -1,0 +1,11 @@
+.complaints-list {
+  tr.control-danger td {
+    background-color: #7e002e;
+  }
+  tr.control-warn td {
+    background-color: #ffbe43;
+  }
+  tr.control-ok td {
+    background-color: #175306;
+  }
+}
