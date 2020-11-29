@@ -25,3 +25,7 @@ UG.PyServices/*/.idea/*
 UG.PyServices/*/__pycache__/*
 UG.PyServices/*/env/*
 UG.PyServices/*/config*.yaml
+UG.PyServices/*/*/.idea/*
+UG.PyServices/*/*/__pycache__/*
+UG.PyServices/*/*/env/*
+UG.PyServices/*/*/config*.yaml
