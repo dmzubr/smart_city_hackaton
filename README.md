@@ -4,7 +4,7 @@
 Уникальность: автоматическая верификация данных отчёта с применением NLU- алгоритмов для обработки больших данных.
 
 # Демо
-Доступно тут - https://vk-lom-finder.cashee.ru/
+Доступно тут - https://smart-city-hack.cashee.ru/
 Учетные записи для входа:
 - region_manager : 01region_manager01
 - admin : Ltybcrf28
